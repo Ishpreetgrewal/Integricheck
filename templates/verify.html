@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Verify File Integrity | IntegriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            IntegriCheck
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/register">
+                Register File
+            </a>
+            <a href="/verify">
+                Verify File
+            </a>
+            <a href="/dashboard">
+                Dashboard
+            </a>
+        </div>
+    </nav>
+
+    <div class="card">
+
+        <h2>Verify File Integrity</h2>
+        <p>
+
+            Upload a file copy or shared version
+            to compare it against the original
+            trusted file stored inside the
+            IntegriCheck database.
+
+        </p>
+
+        <br>
+
+        <form action="/verify"
+              method="POST"
+              enctype="multipart/form-data">
+            <input type="file"
+                   name="file"
+                   required>
+            <button type="submit">
+                Verify Integrity
+            </button>
+        </form>
+        {% if status %}
+        <div class="status-box">
+            <h3>
+                Verification Result
+            </h3>
+            <br>
+            <p>
+                <strong>Filename:</strong>
+                {{ filename }}
+            </p>
+            <br>
+            <p>
+                <strong>Status:</strong>
+                {% if "VERIFIED" in status %}
+                    <span style="color:#22c55e;">
+                        {{ status }}
+                    </span>
+                {% elif "TAMPERED" in status %}
+                    <span style="color:#ef4444;">
+                        {{ status }}
+                    </span>
+                {% else %}
+                    <span style="color:#facc15;">
+                        {{ status }}
+                    </span>
+                {% endif %}
+            </p>
+            <div class="hash-box">
+                <strong>Uploaded File SHA-256:</strong>
+                <br><br>
+                {{ uploaded_hash }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <footer class="footer">
+        <p>
+            © 2026 IntegriCheck —
+            Secure Integrity Verification System
+        </p>
+    </footer>
+</body>
+</html>

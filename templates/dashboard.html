@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | IntegriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            IntegriCheck
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/register">
+                Register File
+            </a>
+
+            <a href="/verify">
+                Verify File
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+        </div>
+    </nav>
+
+
+    <div class="card">
+
+        <h2>Integrity Monitoring Dashboard</h2>
+
+        <p>
+
+            Monitor all trusted files registered
+            inside the IntegriCheck platform.
+            Track digital fingerprints, upload
+            timestamps, file size, and integrity
+            verification status.
+
+        </p>
+        <br>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+
+                    <th>ID</th>
+
+                    <th>Filename</th>
+
+                    <th>File Size</th>
+
+                    <th>Upload Time</th>
+
+                    <th>Status</th>
+
+                </tr>
+
+                {% for file in files %}
+
+                <tr>
+
+                    <td>
+                        {{ file[0] }}
+                    </td>
+
+                    <td>
+                        {{ file[1] }}
+                    </td>
+
+                    <td>
+                        {{ file[3] }} bytes
+                    </td>
+
+                    <td>
+                        {{ file[4] }}
+                    </td>
+
+                    <td>
+
+                        {% if file[5] == "Trusted" %}
+
+                            <span style="color:#22c55e;">
+                                {{ file[5] }}
+                            </span>
+
+                        {% else %}
+
+                            <span style="color:#ef4444;">
+                                {{ file[5] }}
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+
+        <h2>Security Insights</h2>
+
+        <p>
+
+            IntegriCheck uses SHA-256 cryptographic
+            hashing to generate unique digital
+            fingerprints for every trusted file.
+
+        </p>
+
+        <br>
+
+        <div class="table-container">
+
+            <table>
+
+                <tr>
+
+                    <th>Security Capability</th>
+
+                    <th>Description</th>
+
+                </tr>
+
+                <tr>
+
+                    <td>Tampering Detection</td>
+
+                    <td>
+                        Detect unauthorized changes
+                        in shared or distributed files.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Digital Verification</td>
+
+                    <td>
+                        Verify whether uploaded copies
+                        match original trusted versions.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Integrity Monitoring</td>
+
+                    <td>
+                        Maintain trusted records for
+                        long-term document authenticity.
+                    </td>
+
+                </tr>
+
+                <tr>
+
+                    <td>Cybersecurity Workflow</td>
+
+                    <td>
+                        Simulates real-world enterprise
+                        file integrity systems.
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <footer class="footer">
+
+        <p>
+            © 2026 IntegriCheck —
+            Advanced File Integrity Monitoring Platform
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

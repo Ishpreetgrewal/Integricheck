@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register Original File | IntegriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+
+        <div class="logo">
+            IntegriCheck
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/register">
+                Register File
+            </a>
+
+            <a href="/verify">
+                Verify File
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+        </div>
+    </nav>
+    <div class="card">
+
+        <h2>Register Trusted Original File</h2>
+
+        <p>
+
+            Upload the original trusted version
+            of your file. IntegriCheck will generate
+            a secure SHA-256 digital fingerprint
+            for future integrity verification.
+
+        </p>
+        <br>
+        <form action="/register"
+              method="POST"
+              enctype="multipart/form-data">
+
+            <input type="file"
+                   name="file"
+                   required>
+
+            <button type="submit">
+                Register File
+            </button>
+
+        </form>
+        {% if success %}
+        <div class="status-box">
+
+            <h3>
+                Original File Registered Successfully ✅
+            </h3>
+
+            <p>
+
+                The trusted file has been securely
+                stored inside the integrity monitoring
+                system.
+
+            </p>
+
+            <br>
+
+            <p>
+                <strong>Filename:</strong>
+                {{ filename }}
+            </p>
+
+            <div class="hash-box">
+
+                <strong>SHA-256 Digital Fingerprint:</strong>
+
+                <br><br>
+
+                {{ file_hash }}
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+    <footer class="footer">
+
+        <p>
+            © 2026 IntegriCheck —
+            Cybersecurity File Integrity Platform
+        </p>
+
+    </footer>
+
+</body>
+
+</html>
